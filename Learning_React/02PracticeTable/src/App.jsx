@@ -1,6 +1,7 @@
 import AddTable from "./components/AddTable"
-function App() {
+import "./AddTable.css"
 
+function App() {
   return (
     <>
       <AddTable></AddTable>
