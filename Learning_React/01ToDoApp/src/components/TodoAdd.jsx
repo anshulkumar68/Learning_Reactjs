@@ -9,13 +9,13 @@ const TodoAdd = ({handleAdd}) => {
 
     return (
         <>
-        <table className="bg-white w-2/4 shadow-md  text-center">
+        <table className="bg-white w-3/4 shadow-md  text-center">
             
-                <tbody className="text-gray-700 border-solid">
-                    <tr className="border-solid ">
-                        <td className=""><input onChange={handleOnChange} className="enter-task pl-4 py-2" type="text" placeholder="Enter Task" /> </td>
-                        <td className="py-2 px-4"><input className="pr-8 py-2" type="date" /></td>
-                        <td className="py-2 px-4 m-5"><button onClick={handleAdd} className="w-50 bg-green-700 px-4 py-2 rounded-lg text-white font-thin text-sm">Add</button></td>
+                <tbody className="text-gray-700 border-solid ">
+                    <tr className="flex justify-around">
+                        <td className="py-2 px-4"><input onChange={handleOnChange} className="enter-task" type="text" placeholder="Enter Task" /> </td>
+                        <td className="py-2 px-4"><input className="" type="date" /></td>
+                        <td className="py-2 px-4"><button onClick={handleAdd} className="w-50 bg-green-700 px-4 py-2 rounded-lg text-white font-thin text-sm">Add</button></td>
                     </tr>
                 </tbody>
 
