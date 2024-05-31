@@ -41,8 +41,8 @@ function App() {
   return (
     <Container>
       <TodoName />
-      <table className="bg-white w-4/6 shadow-md rounded-lg">
-        <thead className="bg-gray-700 text-white rounded-lg">
+      <table className="bg-white w-4/6 shadow-md ">
+        <thead className="bg-gray-700 text-white">
           <TodoHeading />
         </thead>
         <tbody>
