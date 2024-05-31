@@ -1,12 +1,17 @@
-import TodoItem from "./TodoItem"
+import TodoItem from "./TodoItem";
 
-const TodoItems = ({ todoItems }) => {
+const TodoItems = ({ todoItems, onDeleteClick }) => {
+  return (
+    <>
+      {todoItems.map((item) => (
+        <TodoItem
+          todoName={item.itemName}
+          todoDate={item.itemDate}
+          onDeleteClick={onDeleteClick}
+        ></TodoItem>
+      ))}
+    </>
+  );
+};
 
-    return (
-        <>
-            {todoItems.map(item => <TodoItem todoName={item.itemName} todoDate={item.itemDate} handleDelete = {()=> console.log(`${item.itemName} deleted`)}></TodoItem>)}
-        </>
-    )
-}
-
-export default TodoItems 
+export default TodoItems;

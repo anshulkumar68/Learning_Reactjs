@@ -4,39 +4,37 @@ import TodoHeading from "./components/TodoHeading";
 import TodoAdd from "./components/TodoAdd";
 import TodoItems from "./components/TodoItems";
 import Container from "./components/Container";
+import ShowMessage from "./components/ShowMessage";
+import { useState } from "react";
 
 function App() {
-  const todoItems = [
+  const IntialTodoItems = [
     {
       itemName: "Hit Gym",
-      itemDate: "28-05-2024",
-    },
-    {
-      itemName: "Buy Milk",
-      itemDate: "28-05-2024",
-    },
-
-    {
-      itemName: "Buy Soyachunks",
-      itemDate: "29-05-2024",
+      itemDate: "2024-06-02",
     },
     {
       itemName: "Have Smoothie",
-      itemDate: "29-05-2024",
-    },
-    {
-      itemName: "Have whey protein",
-      itemDate: "29-05-2024",
+      itemDate: "2024-06-02",
     },
   ];
 
-  const handleAddButtonClicked = (event) => {
-    console.log(`Add button clicked`);
+  const [todoItems, setTodoItems] = useState(IntialTodoItems);
+
+  const handleNewItem = (newItemName, newItemDueDate) => {
+    const newTodoItems = [
+      ...todoItems,
+      { itemName: newItemName, itemDate: newItemDueDate },
+    ];
+    setTodoItems(newTodoItems);
   };
 
-  const handleOnChange = (event) => {
-    console.log(event.target.value);
-  }
+  const handleDeleteButtonClicked = (itemToDelete) => {
+    const newTodoItems = todoItems.filter(
+      (item) => item.itemName !== itemToDelete
+    );
+    setTodoItems(newTodoItems);
+  };
 
   return (
     <Container>
@@ -46,8 +44,12 @@ function App() {
           <TodoHeading />
         </thead>
         <tbody>
-          <TodoAdd handleAdd={handleAddButtonClicked} handleChange={handleOnChange}></TodoAdd>
-          <TodoItems todoItems={todoItems}></TodoItems>
+          <TodoAdd onNewItem={handleNewItem}></TodoAdd>
+          {todoItems.length === 0 && <ShowMessage />}
+          <TodoItems
+            todoItems={todoItems}
+            onDeleteClick={handleDeleteButtonClicked}
+          ></TodoItems>
         </tbody>
       </table>
     </Container>
