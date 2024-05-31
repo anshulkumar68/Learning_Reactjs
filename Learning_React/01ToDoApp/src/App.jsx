@@ -34,18 +34,21 @@ function App() {
     console.log(`Add button clicked`);
   };
 
+  const handleOnChange = (event) => {
+    console.log(event.target.value);
+  }
+
   return (
     <Container>
-      <table className="bg-white w-3/4 shadow-md text-center">
-        <thead className="bg-gray-800 text-white">
-          <tr><TodoName/></tr>
+      <TodoName />
+      <table className="bg-white w-4/6 shadow-md rounded-lg">
+        <thead className="bg-gray-700 text-white rounded-lg">
+          <TodoHeading />
         </thead>
         <tbody>
-          <TodoHeading/>
-
+          <TodoAdd handleAdd={handleAddButtonClicked} handleChange={handleOnChange}></TodoAdd>
+          <TodoItems todoItems={todoItems}></TodoItems>
         </tbody>
-        <TodoAdd hanldeAdd={handleAddButtonClicked}></TodoAdd>
-        <TodoItems todoItems={todoItems}></TodoItems>
       </table>
     </Container>
   );
