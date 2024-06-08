@@ -5,13 +5,15 @@ import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import PostList from './components/PostList'
 import Sidebar from './components/Sidebar'
+import PostListProvider from './store/post-list-store'
 
 function App() {
 
-  const [selectedTab, setSelectedTab] = useState("Home");
+  const [selectedTab, setSelectedTab] = useState("Create Post");
 
   return (
     <>
+    <PostListProvider>
       <div className="flex flex-col min-h-screen">
         <Navbar />
         <div className="flex flex-grow">
@@ -22,6 +24,7 @@ function App() {
         </div>
         <Footer />
       </div>
+      </PostListProvider>
     </>
   )
 }
