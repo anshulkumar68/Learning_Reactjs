@@ -3,6 +3,7 @@ import { createContext, useReducer } from "react";
 export const PostListData = createContext({
   postList: [],
   addPost: () => {},
+  getPost: () => {},
   deletePost: () => {},
 });
 
@@ -13,7 +14,10 @@ const postListReducer = (currPostList, action) => {
     newPostList = currPostList.filter(
       (post) => post.id !== action.payload.postId
     );
-  } else if (action.type === "ADD-POST") {
+  } else if(action.type === 'GET-POST'){
+    newPostList = action.payload.posts;
+  }
+  else if (action.type === "ADD-POST") {
     newPostList = [action.payload, ...currPostList];
   }
   return newPostList;
@@ -26,20 +30,28 @@ const PostListProvider = ({ children }) => {
   );
 
   // add post method
-  const addPost = (title, userId, reactions, content, tags) => {
+  const addPost = (title, userId, reactions, body, tags) => {
     // console.log(`${title} ${userId} ${reactions} ${content} ${tags}`);
     dispatchPostList({
       type: "ADD-POST",
       payload: {
         id: Date.now(),
         title: title,
-        content: content,
-        reaction: reactions,
+        body: body,
+        reactions: reactions,
         userId: userId,
         tags: tags,
       },
     });
   };
+
+   // Get post from server
+   const getPost = (posts) => {
+    dispatchPostList({
+        type : "GET-POST",
+        payload: {posts}
+    })
+  }
 
   // delete method
   const deletePost = (postId) => {
@@ -53,29 +65,29 @@ const PostListProvider = ({ children }) => {
   };
 
   return (
-    <PostListData.Provider value={{ postList, addPost, deletePost }}>
+    <PostListData.Provider value={{ postList, addPost, getPost, deletePost }}>
       {children}
     </PostListData.Provider>
   );
 };
 
 const DEFAULT_POST_LIST = [
-  {
-    id: "1",
-    title: "Going Thailand",
-    content: "I'm going on vacation to Thailand; I hope to enjoy it a lot!",
-    reaction: 362,
-    userId: "user-7",
-    tags: ["thailand", "trip", "memories"],
-  },
-  {
-    id: "2",
-    title: "Last Project",
-    content: "Last project as a Bank application which has backend support",
-    reaction: 15,
-    userId: "user-3",
-    tags: ["last", "project", "over"],
-  },
+  // {
+  //   id: "1",
+  //   title: "Going Thailand k",
+  //   body: "I'm going on vacation to Thailand; I hope to enjoy it a lot!",
+  //   reaction: 362,
+  //   userId: "user-7",
+  //   tags: ["thailand", "trip", "memories"],
+  // },
+  // {
+  //   id: "2",
+  //   title: "Last Project",
+  //   body: "Last project as a Bank application which has backend support",
+  //   reaction: 15,
+  //   userId: "user-3",
+  //   tags: ["last", "project", "over"],
+  // },
 ];
 
 export default PostListProvider;

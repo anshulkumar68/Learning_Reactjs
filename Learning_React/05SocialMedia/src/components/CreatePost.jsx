@@ -5,26 +5,26 @@ const CreatePost = () => {
   
    const {addPost} = useContext(PostListData);
   const titleElement = useRef();
-  const userIDElement = useRef();
+  const userIdElement = useRef();
   const reactionsElement = useRef();
-  const contentElement = useRef();
+  const bodyElement = useRef();
   const tagsElement = useRef();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const title = titleElement.current.value;
-    const userId = userIDElement.current.value;
+    const userId = userIdElement.current.value;
     const reactions = reactionsElement.current.value;
-    const content = contentElement.current.value;
+    const body = bodyElement.current.value;
     const tags = tagsElement.current.value.split(" ");
 
     titleElement.current.value="";
-    userIDElement.current.value="";
+    userIdElement.current.value="";
     reactionsElement.current.value="";
-    contentElement.current.value="";
+    bodyElement.current.value="";
     tagsElement.current.value="";
 
-    addPost(title, userId, reactions, content, tags);
+    addPost(title, userId, reactions, body, tags);
   };
 
   return (
@@ -56,7 +56,7 @@ const CreatePost = () => {
               User id
             </label>
             <input
-              ref={userIDElement}
+              ref={userIdElement}
               placeholder="Enter your user id"
               type="text"
               id="email"
@@ -88,7 +88,7 @@ const CreatePost = () => {
               Content
             </label>
             <textarea
-              ref={contentElement}
+              ref={bodyElement}
               placeholder="Tell us more about it"
               id="message"
               className="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
