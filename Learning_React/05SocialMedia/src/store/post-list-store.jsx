@@ -74,7 +74,7 @@ const PostListProvider = ({ children }) => {
 const DEFAULT_POST_LIST = [
   // {
   //   id: "1",
-  //   title: "Going Thailand k",
+  //   title: "Going Thailand",
   //   body: "I'm going on vacation to Thailand; I hope to enjoy it a lot!",
   //   reaction: 362,
   //   userId: "user-7",
