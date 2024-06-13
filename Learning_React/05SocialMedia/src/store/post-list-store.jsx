@@ -69,23 +69,30 @@ const PostListProvider = ({ children }) => {
     });
   };
 
+
   useEffect(() => {
     setFetching(true);
 
     const controller = new AbortController();
     const signal = controller.signal;
 
-    // GET REQUEST from dummyjson
     fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
+      .then((res) => res.json()) 
       .then((data) => {
         getPost(data.posts);
         setFetching(false);
+      })
+      .catch(error => {
+        if (error.name === 'AbortError') {
+            console.log('Fetch aborted');
+        } else {
+            console.error('Fetch error', error);
+        }
       });
 
     return () => {
       controller.abort();
-    }
+    };
   }, []);
 
   return (
