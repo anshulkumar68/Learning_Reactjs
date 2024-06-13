@@ -1,10 +1,10 @@
-import { createContext, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 
 export const PostListData = createContext({
   postList: [],
-  addPost: () => {},
-  getPost: () => {},
-  deletePost: () => {},
+  fetching: false,
+  addPost: () => { },
+  deletePost: () => { },
 });
 
 //  Reducer method
@@ -14,7 +14,7 @@ const postListReducer = (currPostList, action) => {
     newPostList = currPostList.filter(
       (post) => post.id !== action.payload.postId
     );
-  } else if(action.type === 'GET-POST'){
+  } else if (action.type === 'GET-POST') {
     newPostList = action.payload.posts;
   }
   else if (action.type === "ADD-POST") {
@@ -24,32 +24,37 @@ const postListReducer = (currPostList, action) => {
 };
 
 const PostListProvider = ({ children }) => {
-  const [postList, dispatchPostList] = useReducer(
-    postListReducer,
-    DEFAULT_POST_LIST
-  );
+  // Reducer Hook
+  const [postList, dispatchPostList] = useReducer(postListReducer, DEFAULT_POST_LIST);
+  const [fetching, setFetching] = useState(false);
 
   // add post method
-  const addPost = (title, userId, reactions, body, tags) => {
-    // console.log(`${title} ${userId} ${reactions} ${content} ${tags}`);
+  // const addPost = (title, userId, reactions, body, tags) => {
+  //   dispatchPostList({
+  //     type: "ADD-POST",
+  //     payload: {
+  //       id: Date.now(),
+  //       title: title,
+  //       body: body,
+  //       reactions: reactions,
+  //       userId: userId,
+  //       tags: tags,
+  //     },
+  //   });
+  // };
+
+  const addPost = (post) => {
     dispatchPostList({
       type: "ADD-POST",
-      payload: {
-        id: Date.now(),
-        title: title,
-        body: body,
-        reactions: reactions,
-        userId: userId,
-        tags: tags,
-      },
+      payload: post,
     });
   };
 
-   // Get post from server
-   const getPost = (posts) => {
+  // Get post from server
+  const getPost = (posts) => {
     dispatchPostList({
-        type : "GET-POST",
-        payload: {posts}
+      type: "GET-POST",
+      payload: { posts }
     })
   }
 
@@ -64,8 +69,27 @@ const PostListProvider = ({ children }) => {
     });
   };
 
+  useEffect(() => {
+    setFetching(true);
+
+    const controller = new AbortController();
+    const signal = controller.signal;
+
+    // GET REQUEST from dummyjson
+    fetch("https://dummyjson.com/posts", { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        getPost(data.posts);
+        setFetching(false);
+      });
+
+    return () => {
+      controller.abort();
+    }
+  }, []);
+
   return (
-    <PostListData.Provider value={{ postList, addPost, getPost, deletePost }}>
+    <PostListData.Provider value={{ postList, fetching, addPost, deletePost }}>
       {children}
     </PostListData.Provider>
   );

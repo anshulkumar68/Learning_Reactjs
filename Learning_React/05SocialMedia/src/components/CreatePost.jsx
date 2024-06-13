@@ -2,8 +2,8 @@ import React, { useContext, useRef } from "react";
 import { PostListData } from "../store/post-list-store";
 
 const CreatePost = () => {
-  
-   const {addPost} = useContext(PostListData);
+
+  const { addPost } = useContext(PostListData);
   const titleElement = useRef();
   const userIdElement = useRef();
   const reactionsElement = useRef();
@@ -18,13 +18,30 @@ const CreatePost = () => {
     const body = bodyElement.current.value;
     const tags = tagsElement.current.value.split(" ");
 
-    titleElement.current.value="";
-    userIdElement.current.value="";
-    reactionsElement.current.value="";
-    bodyElement.current.value="";
-    tagsElement.current.value="";
+    titleElement.current.value = "";
+    userIdElement.current.value = "";
+    reactionsElement.current.value = "";
+    bodyElement.current.value = "";
+    tagsElement.current.value = "";
 
-    addPost(title, userId, reactions, body, tags);
+    // POST request to server || submit request using fetch
+    fetch('https://dummyjson.com/posts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        // id: Date.now(),
+        title: title,
+        body: body,
+        reactions: reactions,
+        userId: userId,
+        tags: tags,
+      })
+    })
+      .then(res => res.json())
+      .then(post => addPost(post));
+
+    // addPost(title, userId, reactions, body, tags);
+    // addPost(postx);
   };
 
   return (
