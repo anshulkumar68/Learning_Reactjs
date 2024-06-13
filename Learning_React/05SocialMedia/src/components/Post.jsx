@@ -7,7 +7,7 @@ const Post = ({ post }) => {
 
   return (
     <>
-      <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white m-4">
+      <div className="max-w-lg rounded overflow-hidden shadow-lg bg-white m-4">
         <div className="px-6 py-4">
           <button className="relative top-2 left-[330px] text-gray-500 hover:text-gray-800 focus:outline-none text-xl" onClick={() => deletePost(post.id)}>
             {/* <MdDelete /> */}
