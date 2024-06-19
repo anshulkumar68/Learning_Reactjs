@@ -1,23 +1,12 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 
 function App() {
-  const [num, setNum] = useState(10)
+  const [num, setNum] = useState(0)
   // let num = 10;
   const addValue = () => {num+1, setNum(num + 1), console.log(`Value increased to ${num}`);};
   const subValue = () => {num-1, setNum(num - 1), console.log(`Value decreased to ${num}`);} ;
- /* const addValue = function () {
-    num += 1;
-    setNum(num + 1);
-    console.log(`Value increased ${num}`);
-  };
-  const subValue = function () {
-    // num -= 1;
-    setNum(num - 1);
-    console.log(`Value decreased ${num}`);
-  };*/
+
  
   return (
     <>

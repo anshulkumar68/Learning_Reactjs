@@ -22,7 +22,7 @@ const Post = ({ post }) => {
             </span>
           ))}
         </div>
-        <div className="bg-green-100 p-3 mx-2 mb-2 rounded-md">This post has been reacted by {post.reaction} People.</div>
+        <div className="bg-green-100 p-3 mx-2 mb-2 rounded-md">This post has been reacted by {post.reactions.likes} People.</div>
       </div>
     </>
   );
