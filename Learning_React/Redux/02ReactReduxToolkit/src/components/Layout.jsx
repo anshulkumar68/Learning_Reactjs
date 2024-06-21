@@ -2,6 +2,9 @@ import React, { useRef } from 'react'
 import Display from './Display'
 import { useDispatch, useSelector } from 'react-redux'
 import PrivacyMessage from './PrivacyMessage';
+import { counterActions } from '../store/counter';
+import { privacyActions } from '../store/privacy';
+
 
 const Layout = () => {
     const privacy = useSelector((store) => store.privacy);
@@ -9,34 +12,27 @@ const Layout = () => {
     const dispatch = useDispatch();
 
     const handleIncrement = () => {
-        dispatch({type: "INCREMENT"});
+        dispatch(counterActions.increment());
     }
 
     const handleDecrement = () => {
-        dispatch({type : "DECREMENT"});
+        dispatch(counterActions.decrement());
     }
 
     const handleAdd = () => {
-        dispatch({type: "ADD",
-            payload: {
-                num : inputELement.current.value
-            }
-        });
+        dispatch(counterActions.add({
+            num : inputELement.current.value
+        }));
     }
 
     const handleSubtract = () => {
-        dispatch({
-            type: "SUBTRACT",
-            payload: {
-                num: inputELement.current.value
-            }
-        })
+        dispatch(counterActions.subtract({
+            num : inputELement.current.value
+        }));
     }
 
     const handleToggle = () => {
-        dispatch({
-            type : "TOGGLE",
-        })
+        dispatch(privacyActions.toggle());
     }
 
     return (
