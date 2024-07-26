@@ -1,12 +1,13 @@
 import './App.css'
 import Navbar from './components/Navbar'
-import Counter from './components/Counter'
+import Images from './components/Images'
 
 function App() {
+  
   return (
     <>
       <Navbar/>
-      <Counter/>
+      <Images/>
     </>
   )
 }
