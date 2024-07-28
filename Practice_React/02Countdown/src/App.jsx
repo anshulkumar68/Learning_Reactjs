@@ -17,7 +17,7 @@ function App() {
   //   Handle Start, reset and pause
   const handleStart = () => {
     setMessage("");
-    if (hours < 0 || minutes < 0 || seconds <= 0) setInvalid("Invalid Input");
+    if (hours < 0 || minutes < 0 || seconds < 0) setInvalid("Invalid Input");
     else setIsStart(true);
   };
 
