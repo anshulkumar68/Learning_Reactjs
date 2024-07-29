@@ -7,14 +7,14 @@ function App() {
 
   useEffect(() => {
     setInterval(() => {
-      setValue((val) => val + 1);
+      setValue((value) => value + 1);
     }, 100)
   }, [])
 
   return (
     <>      
     <div className="p-4 flex flex-col items-center">
-      <span className="flex justify-centertext-xl font-bold mb-4">Progress Bar </span>
+      <span className="flex justify-center text-xl font-bold mb-4 text-[#e5e5e5] mt-[5rem]">PROGRESS BAR</span>
       <Bar value={value}/>
     </div>
     </>
