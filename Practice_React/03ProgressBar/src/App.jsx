@@ -15,7 +15,7 @@ function App() {
     <>      
     <div className="p-4 flex flex-col items-center">
       <span className="flex justify-centertext-xl font-bold mb-4">Progress Bar </span>
-      <Bar value={value} />
+      <Bar value={value}/>
     </div>
     </>
   )
